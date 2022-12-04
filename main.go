@@ -9,7 +9,6 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
-	"syscall"
 
 	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
@@ -64,10 +63,12 @@ func main() {
 								allowMsg := fmt.Sprintf("%s Allowing %s", strconv.Itoa(line), ipAddr)
 								displaySuccess(allowMsg)
 							}
+
 							_, allowErr := AllowIpAddr(ipAddr, comment)
+
 							if allowErr != nil {
-								cli.Exit("Error", 0)
-								return nil
+								log.Println("Error", allowErr)
+								continue
 							}
 						}
 						line++
@@ -90,23 +91,17 @@ func main() {
 }
 
 func AllowIpAddr(ip string, comment string) (bool, error) {
-	ufwCmd, lookErr := exec.LookPath("ufw")
-
-	if lookErr != nil {
-		displayError("Command ufw is not found.")
-		return false, errors.New("Command is not found")
-	}
 	
-	env := os.Environ()
+	cmd := exec.Command("ufw", "allow", "to", "any", "from", ip, "comment", comment)
 	
-	fmt.Println(env, args)
-
-	execErr := syscall.Exec(ufwCmd, []string{"ufw allow from "}, env)
-
-	if execErr != nil {
+	_, err := cmd.CombinedOutput()
+	
+	if err != nil {
 		displayError("Error while executing the comand.")
+		log.Fatal(err)
 		return false, errors.New("Execution error.")
 	}
+	
 	return true, nil
 }
 
