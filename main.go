@@ -96,17 +96,13 @@ func AllowIpAddr(ip string, comment string) (bool, error) {
 		displayError("Command ufw is not found.")
 		return false, errors.New("Command is not found")
 	}
-
-	arg := "ufw allow to any from " + ip
-
-	if comment != "" {
-		arg += " comment " + comment
-	}
-
-	args := []string{arg}
-	args.append(arg)
+	
 	env := os.Environ()
-	execErr := syscall.Exec(ufwCmd, args, env)
+	
+	fmt.Println(env, args)
+
+	execErr := syscall.Exec(ufwCmd, []string{"ufw allow from "}, env)
+
 	if execErr != nil {
 		displayError("Error while executing the comand.")
 		return false, errors.New("Execution error.")
