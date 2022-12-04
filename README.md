@@ -36,13 +36,14 @@ Example content of the text file.
 Download the archived release binary from the release section, adds executable permission to `allowip` file from the extracted folder and move the file into `/usr/local/bin`.
 
 ```bash
-> cd ~/
-> wget "url.download.released.archived"
-> tar -xzvf allowip-amd64-linux-v0.x.x.tar.gz
-> cd extracted/path
-> chmod +x allowip
-> mv allowip /usr/bin
-> which allowip
+❯ cd ~/
+❯ wget "url.download.released.archived"
+❯ tar -xzvf allowip-amd64-linux-v0.x.x.tar.gz
+❯ cd extracted/path
+❯ chmod +x allowip
+❯ mv allowip /usr/bin
+❯ which allowip
+/usr/local/bin/allowip
 ```
 
 ## Build
@@ -51,5 +52,5 @@ If required to build, after cloning this repo, download required packages, `go b
 
 ```bash
 allowip-cli on git master [!] via go v1.19.3 via py v3.11.0 (.venv) 
-x GOARCH=amd64 GOOS=linux go build -o build/amd64-linux/allowip main.go
+❯ GOARCH=amd64 GOOS=linux go build -o build/amd64-linux/allowip main.go
 ```
