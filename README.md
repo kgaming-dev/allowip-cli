@@ -31,4 +31,25 @@ Example content of the text file.
 131.0.72.0/22:Cloudflare Ip Address
 ```
 
+## Install
 
+Download the archived release binary from the release section, adds executable permission to `allowip` file from the extracted folder and move the file into `/usr/local/bin`.
+
+```bash
+> cd ~/
+> wget "url.download.released.archived"
+> tar -xzvf allowip-amd64-linux-v0.x.x.tar.gz
+> cd extracted/path
+> chmod +x allowip
+> mv allowip /usr/bin
+> which allowip
+```
+
+## Build
+
+If required to build, after cloning this repo, download required packages, `go build` can be executed by attaching `GOARCH=` and `GOOS` for the output binary.
+
+```bash
+allowip-cli on git master [!] via go v1.19.3 via py v3.11.0 (.venv) 
+x GOARCH=amd64 GOOS=linux go build -o build/amd64-linux/allowip main.go
+```
