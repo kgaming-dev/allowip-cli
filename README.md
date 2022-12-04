@@ -1,4 +1,4 @@
-# AllowIpAddr CLI
+# AllowIp CLI
 
 > Command Line Interface to allow an IP Addr or a list of IP Addresses in ufw rule set.
 
